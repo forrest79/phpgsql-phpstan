@@ -1,0 +1,11 @@
+parameters:
+	universalObjectCratesClasses:
+		- Forrest79\PhPgSql\Db\Row
+
+services:
+	Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Reflection\FluentComplexDynamicMethodReturnTypeExtension
+		arguments:
+			fluentQueryClass: Forrest79\PhPgSql\Fluent\Query
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension

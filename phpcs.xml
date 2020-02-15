@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<ruleset name="PhPgSql">
+	<rule ref="./vendor/consistence/coding-standard/Consistence/ruleset.xml">
+	</rule>
+
+	<rule ref="Squiz.WhiteSpace.FunctionSpacing">
+		<properties>
+			<property name="spacing" type="integer" value="2"/>
+		</properties>
+	</rule>
+
+	<rule ref="Squiz.WhiteSpace.MemberVarSpacing">
+		<properties>
+			<property name="spacingBeforeFirst" type="integer" value="0"/>
+		</properties>
+	</rule>
+
+	<rule ref="./vendor/slevomat/coding-standard/SlevomatCodingStandard/ruleset.xml">
+		<exclude name="SlevomatCodingStandard.Classes.EmptyLinesAroundClassBraces.NoEmptyLineAfterOpeningBrace"/>
+		<exclude name="SlevomatCodingStandard.Commenting.DisallowOneLinePropertyDocComment.OneLinePropertyComment"/>
+		<exclude name="SlevomatCodingStandard.ControlStructures.RequireYodaComparison.RequiredYodaComparison"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.FullyQualifiedClassNameAfterKeyword"/>
+		<exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+		<properties>
+			<property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="0"/>
+			<property name="spacesCountAroundEqualsSign" type="int" value="0"/>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
+		<exclude-pattern>src/PHPStan/Reflection/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<exclude-pattern>src/*</exclude-pattern>
+	</rule>
+</ruleset>
