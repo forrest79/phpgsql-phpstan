@@ -2,6 +2,7 @@
 
 namespace Forrest79\PhPgSql\PHPStan\Reflection;
 
+use Forrest79\PhPgSql;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type\DynamicMethodReturnTypeExtension;
@@ -23,7 +24,7 @@ final class FluentComplexDynamicMethodReturnTypeExtension implements DynamicMeth
 
 	public function getClass(): string
 	{
-		return $this->fluentQueryClass;
+		return PhPgSql\Fluent\Complex::class;
 	}
 
 
@@ -35,7 +36,7 @@ final class FluentComplexDynamicMethodReturnTypeExtension implements DynamicMeth
 
 	public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
 	{
-		return new ObjectType($this->getClass());
+		return new ObjectType($this->fluentQueryClass);
 	}
 
 }
