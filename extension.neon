@@ -6,6 +6,6 @@ services:
 	Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
 		class: Forrest79\PhPgSql\PHPStan\Reflection\FluentComplexDynamicMethodReturnTypeExtension
 		arguments:
-			fluentQueryClass: Forrest79\PhPgSql\Fluent\Query
+			fluentQueryClass: Forrest79\PhPgSql\Fluent\QueryExecute
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
