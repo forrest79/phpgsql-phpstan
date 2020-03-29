@@ -38,4 +38,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<exclude-pattern>src/*</exclude-pattern>
 	</rule>
+
+	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
+		<exclude-pattern>src/*</exclude-pattern>
+	</rule>
 </ruleset>
