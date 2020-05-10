@@ -34,7 +34,11 @@ final class FluentComplexDynamicMethodReturnTypeExtension implements DynamicMeth
 	}
 
 
-	public function getTypeFromMethodCall(MethodReflection $methodReflection, MethodCall $methodCall, Scope $scope): Type
+	public function getTypeFromMethodCall(
+		MethodReflection $methodReflection,
+		MethodCall $methodCall,
+		Scope $scope
+	): Type
 	{
 		return new ObjectType($this->fluentQueryClass);
 	}

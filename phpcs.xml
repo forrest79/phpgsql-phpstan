@@ -24,19 +24,32 @@
 		<exclude name="SlevomatCodingStandard.Namespaces.UseOnlyWhitelistedNamespaces"/>
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+	<rule ref="SlevomatCodingStandard.Classes.ClassMemberSpacing">
 		<properties>
-			<property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="0"/>
-			<property name="spacesCountAroundEqualsSign" type="int" value="0"/>
+			<property name="linesCountBetweenMembers" type="int" value="2"/>
 		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Classes.MethodSpacing">
+		<properties>
+			<property name="minLinesCount" type="int" value="2"/>
+			<property name="maxLinesCount" type="int" value="2"/>
+		</properties>
+	</rule>
+
+	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
+		<exclude-pattern>src/*</exclude-pattern>
 	</rule>
 
 	<rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
 		<exclude-pattern>src/PHPStan/Reflection/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
 	</rule>
 
-	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
-		<exclude-pattern>src/*</exclude-pattern>
+	<rule ref="SlevomatCodingStandard.TypeHints.DeclareStrictTypes">
+		<properties>
+			<property name="newlinesCountBetweenOpenTagAndDeclare" type="int" value="0"/>
+			<property name="spacesCountAroundEqualsSign" type="int" value="0"/>
+		</properties>
 	</rule>
 
 	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
