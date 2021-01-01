@@ -1,7 +1,7 @@
 {
 	"name": "forrest79/phpgsql-phpstan",
 	"description": "PhPgSql class reflection extension and settings for PHPStan.",
-	"keywords": ["phpstan", "phpgsql"],
+	"keywords": ["phpgsql", "phpstan"],
 	"type": "phpstan-extension",
 	"license": "BSD-3-Clause",
 	"authors": [
@@ -11,7 +11,7 @@
 		}
 	],
 	"require": {
-		"php": ">=7.1",
+		"php": "^7.1 | ^8.0",
 		"phpstan/phpstan": "^0.12"
 	},
 	"require-dev": {
