@@ -1,6 +1,8 @@
 # PhPgSql class reflection extension for PHPStan
 
-[![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://github.com/forrest79/PhPgSql-PHPStan/blob/master/license.md)
+[![Latest Stable Version](https://poser.pugx.org/forrest79/phpgsql-phpstan/v)](//packagist.org/packages/forrest79/phpgsql-phpstan)
+[![Monthly Downloads](https://poser.pugx.org/forrest79/phpgsql-phpstan/d/monthly)](//packagist.org/packages/forrest79/phpgsql-phpstan)
+[![License](https://poser.pugx.org/forrest79/phpgsql-phpstan/license)](//packagist.org/packages/forrest79/phpgsql-phpstan)
 [![Build](https://github.com/forrest79/PhPgSql-PHPStan/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/forrest79/PhPgSql-PHPStan/actions/workflows/build.yml)
 
 * [PHPStan](https://github.com/phpstan/phpstan)
