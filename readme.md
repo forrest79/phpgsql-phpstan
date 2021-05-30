@@ -29,11 +29,40 @@ includes:
     - vendor/forrest79/phpgsql-phpstan/extension.neon
 ```
 
-If you're using your own `Forrest79\PhPgSql\Fluen\Query` set it like this:
+If you're using your own `Forrest79\PhPgSql\Db\Row` or `Forrest79\PhPgSql\Fluen\Query`, you can set it likes this:
+
+```yaml
+parameters:
+	forrest79:
+		phpgsql:
+			dbRowClass: MyOwn\PhPgSql\Db\RowXyz
+			fluentQueryClass: MyOwn\PhPgSql\Fluent\QueryXyz
+```
+
+Or you can set just one extension:
+
+- for `PhPgSql\Db\Result` (for fetching the correct `Row` object from fetch methods - unfortunately `Row` iteration must be typed right in your code for now):
 
 ```yaml
 services:
-    Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
-        arguments:
-            fluentQueryClass: MyOwn\PhPgSql\Fluent\QueryXyz
+	Forrest79PhPgSqlPHPStanReflectionDbResultDynamicMethodReturnTypeExtension:
+		arguments:
+			dbRowClass: MyOwn\PhPgSql\Db\RowXyz
+```
+- for `PhPgSql\Fluent\QueryExecute` (for fetching the correct `Row` object from fetch methods - unfortunately `Row` iteration must be typed right in your code for now):
+
+```yaml
+services:
+	Forrest79PhPgSqlPHPStanReflectionFluentQueryExecuteDynamicMethodReturnTypeExtension:
+		arguments:
+			dbRowClass: MyOwn\PhPgSql\Db\RowXyz
+```
+
+- for `PhPgSql\Fluent\Complex` (to return right `Query` in `query()` method):
+
+```yaml
+services:
+	Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
+		arguments:
+			fluentQueryClass: MyOwn\PhPgSql\Fluent\QueryXyz
 ```

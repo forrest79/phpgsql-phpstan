@@ -25,8 +25,13 @@
 			"Forrest79\\PhPgSql\\": "src/"
 		}
 	},
+	"autoload-dev": {
+		"psr-4": {
+			"Forrest79\\PhPgSql\\Tests\\": "tests/"
+		}
+	},
 	"scripts": {
-		"phpcs": "vendor/bin/phpcs -s src",
-		"phpstan": "vendor/bin/phpstan analyse src"
+		"phpcs": "vendor/bin/phpcs -s src tests",
+		"phpstan": "vendor/bin/phpstan analyse src tests"
 	}
 }

@@ -1,11 +1,38 @@
+parametersSchema:
+	forrest79: structure([
+		phpgsql: structure([
+			dbRowClass: string()
+			fluentQueryClass: string()
+		])
+	])
+
 parameters:
 	universalObjectCratesClasses:
 		- Forrest79\PhPgSql\Db\Row
 
+	forrest79:
+		phpgsql:
+			dbRowClass: Forrest79\PhPgSql\Db\Row
+			fluentQueryClass: Forrest79\PhPgSql\Fluent\QueryExecute
+
 services:
+	Forrest79PhPgSqlPHPStanReflectionDbResultDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Reflection\DbResultDynamicMethodReturnTypeExtension
+		arguments:
+			dbRowClass: %forrest79.phpgsql.dbRowClass%
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension
+
+	Forrest79PhPgSqlPHPStanReflectionFluentQueryExecuteDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Reflection\FluentQueryExecuteDynamicMethodReturnTypeExtension
+		arguments:
+			dbRowClass: %forrest79.phpgsql.dbRowClass%
+		tags:
+			- phpstan.broker.dynamicMethodReturnTypeExtension
+
 	Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
 		class: Forrest79\PhPgSql\PHPStan\Reflection\FluentComplexDynamicMethodReturnTypeExtension
 		arguments:
-			fluentQueryClass: Forrest79\PhPgSql\Fluent\QueryExecute
+			fluentQueryClass: %forrest79.phpgsql.fluentQueryClass%
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension

@@ -1,5 +1,15 @@
 includes:
-	- vendor/phpstan/phpstan-strict-rules/rules.neon
+	- %rootDir%/conf/bleedingEdge.neon
+	- %rootDir%/../phpstan-strict-rules/rules.neon
+
+	# Settings for tests
+	- extension.neon
 
 parameters:
 	level: max
+
+	# Settings for tests
+	forrest79:
+		phpgsql:
+			dbRowClass: Forrest79\PhPgSql\Tests\OwnRow
+			fluentQueryClass: Forrest79\PhPgSql\Tests\OwnQuery
