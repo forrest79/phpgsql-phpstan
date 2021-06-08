@@ -4,7 +4,7 @@ namespace Forrest79\PhPgSql\Tests;
 
 use Forrest79\PhPgSql\Db;
 
-class OwnRow extends Db\Row
+final class OwnRow extends Db\Row
 {
 
 	public function ownRowFunction(): void

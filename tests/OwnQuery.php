@@ -4,7 +4,7 @@ namespace Forrest79\PhPgSql\Tests;
 
 use Forrest79\PhPgSql\Fluent;
 
-class OwnQuery extends Fluent\QueryExecute
+final class OwnQuery extends Fluent\QueryExecute
 {
 
 	public function ownQueryFunction(): void

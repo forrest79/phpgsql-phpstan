@@ -15,10 +15,9 @@
 		"phpstan/phpstan": "^0.12"
 	},
 	"require-dev": {
-		"forrest79/phpgsql": "~0.12",
-		"phpstan/phpstan-strict-rules": "^0.12",
-		"consistence-community/coding-standard": "^3.10",
-		"slevomat/coding-standard": "^6.3"
+		"forrest79/phpcs": "^0.2",
+		"forrest79/phpgsql": "~0.14",
+		"phpstan/phpstan-strict-rules": "^0.12"
 	},
 	"autoload": {
 		"psr-4": {

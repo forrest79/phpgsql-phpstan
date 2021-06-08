@@ -4,7 +4,7 @@ namespace Forrest79\PhPgSql\Tests;
 
 use Forrest79\PhPgSql\Db;
 
-class Tests
+final class Tests
 {
 
 	public static function testFluentComplexDynamicMethodReturnTypeExtension(OwnQuery $ownQuery): void

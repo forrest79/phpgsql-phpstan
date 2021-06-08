@@ -4,7 +4,7 @@ namespace Forrest79\PhPgSql\Tests;
 
 use Forrest79\PhPgSql\Db;
 
-class OwnRowFactory implements Db\RowFactory
+final class OwnRowFactory implements Db\RowFactory
 {
 
 	/**
