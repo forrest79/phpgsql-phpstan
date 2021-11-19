@@ -30,15 +30,107 @@ final class Tests
 			$ownRowAll->ownRowFunction();
 		}
 
-		foreach ($result->fetchAssoc('id') as $ownRowAssoc) {
+		$checkInt = static function (int $int): void {
+			echo 'This is int: ' . $int;
+		};
+
+		/**
+		 * @param int|string $intString
+		 */
+		$checkIntString = static function ($intString): void {
+			echo 'This is int or string: ' . $intString;
+		};
+
+		$checkArray = static function (array $array): void {
+			echo 'This is arr: ' . implode(', ', $array);
+		};
+
+		foreach ($result->fetchAssoc('id') as $id => $ownRowAssoc) {
+			$checkIntString($id);
 			$ownRowAssoc->ownRowFunction();
+		}
+
+		foreach ($result->fetchAssoc('[]') as $index => $ownRowAssoc) {
+			$checkInt($index);
+			$ownRowAssoc->ownRowFunction();
+		}
+
+		foreach ($result->fetchAssoc('type[]') as $type => $types) {
+			$checkIntString($type);
+			foreach ($types as $index => $ownRowAssoc) {
+				$checkInt($index);
+				$ownRowAssoc->ownRowFunction();
+			}
+		}
+
+		foreach ($result->fetchAssoc('[]type') as $index => $type) {
+			$checkInt($index);
+			foreach ($type as $ownRowAssoc) {
+				$checkIntString($type);
+				$ownRowAssoc->ownRowFunction();
+			}
+		}
+
+		foreach ($result->fetchAssoc('type|subtype') as $type => $subtypes) {
+			$checkIntString($type);
+			foreach ($subtypes as $subtype => $ownRowAssoc) {
+				$checkIntString($subtype);
+				$ownRowAssoc->ownRowFunction();
+			}
+		}
+
+		foreach ($result->fetchAssoc('country[]city') as $country => $indexesCities) {
+			$checkIntString($country);
+			foreach ($indexesCities as $index => $cities) {
+				$checkInt($index);
+				foreach ($cities as $city => $ownRowAssoc) {
+					$checkIntString($city);
+					$ownRowAssoc->ownRowFunction();
+				}
+			}
+		}
+
+		foreach ($result->fetchAssoc('country[]city=id') as $country => $indexesCities) {
+			$checkIntString($country);
+			foreach ($indexesCities as $index => $cities) {
+				$checkInt($index);
+				foreach ($cities as $city => $id) {
+					$checkIntString($city);
+					$checkIntString($id);
+				}
+			}
+		}
+
+		foreach ($result->fetchAssoc('country[]city=[]') as $country => $indexesCities) {
+			$checkIntString($country);
+			foreach ($indexesCities as $index => $cities) {
+				$checkInt($index);
+				foreach ($cities as $city => $array) {
+					$checkIntString($city);
+					$checkArray($array);
+				}
+			}
+		}
+
+		foreach ($result->fetchAssoc('id|country[]city=[]') as $id => $countries) {
+			$checkIntString($id);
+			foreach ($countries as $country => $indexesCities) {
+				$checkIntString($country);
+				foreach ($indexesCities as $index => $cities) {
+					$checkInt($index);
+					foreach ($cities as $city => $array) {
+						$checkIntString($city);
+						$checkArray($array);
+					}
+				}
+			}
 		}
 
 		foreach ($result->getIterator() as $ownRowIteration) {
 			$ownRowIteration->ownRowFunction();
 		}
 
-		// Can't be simple done right now :-(
+		// Can't be simply done right now :-(
 		//foreach ($result as $ownRowIteration) {
 		//	$ownRowIteration->ownRowFunction();
 		//}
