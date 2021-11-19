@@ -36,26 +36,29 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 		} else if ($methodReflection->getName() === 'fetchAll') {
 			return new Type\ArrayType(new Type\IntegerType(), new Type\ObjectType($this->dbRowClass));
 		} else if ($methodReflection->getName() === 'fetchAssoc') {
-			if (count($methodCall->getArgs()) === 1) {
+			if (count($methodCall->getArgs()) > 0) {
 				$arg = $methodCall->getArgs()[0]->value;
 				$scopedType = $scope->getType($arg);
 
-				// this should cover PHPStan itself
+				// we're able to parse only constant string types, return default
 				if (!($scopedType instanceof Type\Constant\ConstantStringType)) {
-					throw new \InvalidArgumentException('fetchAssoc() descriptor is not string.');
+					return new Type\ArrayType(
+						new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
+						new Type\MixedType()
+					);
 				}
 
 				$assocDesc = $scopedType->getValue();
 
 				$parts = \preg_split('#(\[\]|=|\|)#', $assocDesc, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
 				if (($parts === FALSE) || ($parts === [])) {
-					self::fetchAssocBadDescriptor($assocDesc); // this should be nicer as PHPStan rule, but we need to care about here too
+					return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
 
 				$firstPart = \reset($parts);
 				$lastPart = \end($parts);
 				if (($firstPart === '=') || ($firstPart === '|') || ($lastPart === '=') || ($lastPart === '|')) {
-					self::fetchAssocBadDescriptor($assocDesc); // this should be nicer as PHPStan rule, but we need to care about here too
+					return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
 
 				$reversedParts = array_reverse($parts);
@@ -77,7 +80,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				foreach ($reversedParts as $part) {
 					if ($part === '[]') {
 						if (($last === '[]') || ($last === '|')) {
-							self::fetchAssocBadDescriptor($assocDesc); // this should be nicer as PHPStan rule, but we need to care about here too
+							return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 						}
 
 						$type =	new Type\ArrayType(
@@ -88,7 +91,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 						$last = $part;
 					} else if ($part === '|') {
 						if (($last === '[]') || ($last === '|')) {
-							self::fetchAssocBadDescriptor($assocDesc); // this should be nicer as PHPStan rule, but we need to care about here too
+							return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 						}
 
 						$type = new Type\ArrayType(
@@ -113,22 +116,13 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 			}
 
 			// this should cover PHPStan itself
-			throw new \InvalidArgumentException('Only one argument is allowed in fetchAssoc().');
+			return new Type\ErrorType();
 		} else if ($methodReflection->getName() === 'getIterator') {
 			return new Type\IterableType(new Type\IntegerType(), new Type\ObjectType($this->dbRowClass));
 		}
 
 		// this should never happen
 		throw new \InvalidArgumentException(\sprintf('Unsupported method \'%s\' in FetchDynamicMethodReturnTypeExtension.', $methodReflection->getName()));
-	}
-
-
-	/**
-	 * @phpstan-return never
-	 */
-	private static function fetchAssocBadDescriptor(string $assocDesc): void
-	{
-		throw new \InvalidArgumentException(sprintf('Bad descriptor in fetchAssoc(\'%s\').', $assocDesc));
 	}
 
 }
