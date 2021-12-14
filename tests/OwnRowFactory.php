@@ -8,7 +8,7 @@ final class OwnRowFactory implements Db\RowFactory
 {
 
 	/**
-	 * @param array<string, mixed> $rawValues
+	 * @param array<string, string|NULL> $rawValues
 	 * @return OwnRow
 	 */
 	public function createRow(Db\ColumnValueParser $columnValueParser, array $rawValues): Db\Row
