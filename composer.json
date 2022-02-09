@@ -32,5 +32,10 @@
 	"scripts": {
 		"phpcs": "vendor/bin/phpcs -s src tests",
 		"phpstan": "vendor/bin/phpstan analyse src tests"
+	},
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": false
+		}
 	}
 }
