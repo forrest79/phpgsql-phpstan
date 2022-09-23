@@ -156,10 +156,29 @@ final class Tests
 			$ownRowIteration->ownRowFunction();
 		}
 
-		// Can't be simple done right now :-(
+		// Can't be simple done right now :-( Use `assert(is_dbrow(...));`
 		//foreach ($ownQuery as $ownRowIteration) {
 		//	$ownRowIteration->ownRowFunction();
 		//}
+	}
+
+
+	public static function testIsDbRowFunctionTypeSpecifyingExtension(OwnQuery $ownQuery): void
+	{
+		foreach ($ownQuery as $ownRowIteration) {
+			\assert(\is_dbrow($ownRowIteration));
+			$ownRowIteration->ownRowFunction();
+		}
+
+		$row = $ownQuery->fetch();
+		\assert(\is_dbrow($row, ['columnInt' => '?int', 'columnString' => 'string', 'columnFloat' => 'float', 'columnDatetime' => \DateTime::class]));
+		self::testTypes($row->columnInt, $row->columnString, $row->columnFloat, $row->columnDatetime);
+	}
+
+
+	private static function testTypes(?int $nullableInteger, string $text, float $numeric, \DateTime $dateTime): void
+	{
+		var_dump($nullableInteger, $text, $nullableInteger, $numeric, $dateTime);
 	}
 
 }

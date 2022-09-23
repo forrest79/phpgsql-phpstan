@@ -36,3 +36,10 @@ services:
 			fluentQueryClass: %forrest79.phpgsql.fluentQueryClass%
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
+
+	Forrest79PhPgSqlPHPStanAnalyserIsDbRowFunctionTypeSpecifyingExtension:
+		class: Forrest79\PhPgSql\PHPStan\Analyser\IsDbRowFunctionTypeSpecifyingExtension
+		arguments:
+			dbRowClass: %forrest79.phpgsql.dbRowClass%
+		tags:
+			- phpstan.typeSpecifier.functionTypeSpecifyingExtension
