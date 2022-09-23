@@ -4,6 +4,7 @@ namespace Forrest79\PhPgSql\PHPStan\Reflection;
 
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
+use PHPStan\ShouldNotHappenException;
 use PHPStan\Type;
 use PhpParser\Node\Expr\MethodCall;
 
@@ -122,7 +123,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 		}
 
 		// this should never happen
-		throw new \InvalidArgumentException(\sprintf('Unsupported method \'%s\' in FetchDynamicMethodReturnTypeExtension.', $methodReflection->getName()));
+		throw new ShouldNotHappenException(\sprintf('Unsupported method \'%s\' in FetchDynamicMethodReturnTypeExtension.', $methodReflection->getName()));
 	}
 
 }
