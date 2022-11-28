@@ -101,3 +101,24 @@ services:
 		arguments:
 			dbRowClass: MyOwn\PhPgSql\Db\RowXyz
 ```
+
+Or you can use simple `DbRow` annotation.
+
+```php
+foreach ($someQuery as $row) {
+  // here is $row as Forrest79\PhPgSql\Db\Row for PHPStan
+  /** @var DbRow $row */
+  // here is as your custom row object
+}
+```
+
+Use `DbRow` pseudotype whenever you want, params, returns, vars...
+
+To set only this extension use:
+
+```yaml
+services:
+	Forrest79PhPgSqlPHPStanPhpDocDbRowTypeNodeResolverExtension:
+		arguments:
+			dbRowClass: MyOwn\PhPgSql\Db\RowXyz
+```

@@ -181,4 +181,13 @@ final class Tests
 		var_dump($nullableInteger, $text, $nullableInteger, $numeric, $dateTime);
 	}
 
+
+	public static function testIsDbRowFunctionTypeSpecifyingExtension2(OwnQuery $ownQuery): void
+	{
+		foreach ($ownQuery as $ownRowIteration) {
+			/** @var DbRow $ownRowIteration */
+			$ownRowIteration->ownRowFunction();
+		}
+	}
+
 }

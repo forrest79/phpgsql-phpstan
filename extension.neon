@@ -43,3 +43,10 @@ services:
 			dbRowClass: %forrest79.phpgsql.dbRowClass%
 		tags:
 			- phpstan.typeSpecifier.functionTypeSpecifyingExtension
+
+	Forrest79PhPgSqlPHPStanPhpDocDbRowTypeNodeResolverExtension:
+		class: Forrest79\PhPgSql\PHPStan\PhpDoc\DbRowTypeNodeResolverExtension
+		arguments:
+			dbRowClass: %forrest79.phpgsql.dbRowClass%
+		tags:
+			- phpstan.phpDoc.typeNodeResolverExtension
