@@ -2,6 +2,7 @@
 
 namespace Forrest79\PhPgSql\PHPStan\Reflection;
 
+use Forrest79\PhPgSql;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
 use PHPStan\ShouldNotHappenException;
@@ -42,18 +43,19 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				$scopedType = $scope->getType($arg);
 
 				// we're able to parse only constant string types, return default
-				if (!($scopedType instanceof Type\Constant\ConstantStringType)) {
+				$constantStrings = $scopedType->getConstantStrings();
+				if (count($constantStrings) === 0) {
 					return new Type\ArrayType(
 						new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
 						new Type\MixedType()
 					);
 				}
 
-				$assocDesc = $scopedType->getValue();
+				$assocDesc = PhPgSql\PHPStan\Helper::getImplodedConstantString($constantStrings);
 
 				$parts = \preg_split('#(\[\]|=|\|)#', $assocDesc, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
 				if (($parts === FALSE) || ($parts === [])) {
-					return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
+					return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
 
 				$firstPart = \reset($parts);

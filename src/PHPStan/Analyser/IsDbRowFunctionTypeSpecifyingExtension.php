@@ -3,6 +3,7 @@
 namespace Forrest79\PhPgSql\PHPStan\Analyser;
 
 use DG;
+use Forrest79\PhPgSql;
 use PHPStan\Analyser;
 use PHPStan\Reflection;
 use PHPStan\Type;
@@ -52,11 +53,14 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 			$withPropertiesArg = $args[1]->value;
 			$scopedType = $scope->getType($withPropertiesArg);
 
-			if ($scopedType instanceof Type\Constant\ConstantArrayType) {
+			if (count($scopedType->getConstantArrays()) > 0) {
+				assert($scopedType instanceof Type\Constant\ConstantArrayType);
+
 				$columns = [];
 				foreach ($scopedType->getKeyTypes() as $key) {
-					if ($key instanceof Type\Constant\ConstantStringType) {
-						$columns[] = $key->getValue();
+					$keyConstantStrings = $key->getConstantStrings();
+					if (count($keyConstantStrings) > 0) {
+						$columns[] = PhPgSql\PHPStan\Helper::getImplodedConstantString($keyConstantStrings);
 					} else {
 						break;
 					}
@@ -66,8 +70,9 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 				if (($columns !== []) && (count($columns) === count($scopedType->getKeyTypes()))) {
 					$types = [];
 					foreach ($scopedType->getValueTypes() as $value) {
-						if ($value instanceof Type\Constant\ConstantStringType) {
-							$types[] = $value->getValue();
+						$valueConstantStrings = $value->getConstantStrings();
+						if (count($valueConstantStrings) > 0) {
+							$types[] = PhPgSql\PHPStan\Helper::getImplodedConstantString($valueConstantStrings);
 						} else {
 							break;
 						}
