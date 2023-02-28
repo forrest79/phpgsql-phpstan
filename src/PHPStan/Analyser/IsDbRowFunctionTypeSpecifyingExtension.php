@@ -51,13 +51,15 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 		$dbRowClass = $this->dbRowClass;
 		if (isset($args[1])) {
 			$withPropertiesArg = $args[1]->value;
-			$scopedType = $scope->getType($withPropertiesArg);
 
-			if (count($scopedType->getConstantArrays()) > 0) {
-				assert($scopedType instanceof Type\Constant\ConstantArrayType);
+			$scopedType = $scope->getType($withPropertiesArg);
+			$arrays = $scopedType->getConstantArrays();
+
+			if (count($arrays) === 1) {
+				$array = $arrays[0];
 
 				$columns = [];
-				foreach ($scopedType->getKeyTypes() as $key) {
+				foreach ($array->getKeyTypes() as $key) {
 					$keyConstantStrings = $key->getConstantStrings();
 					if (count($keyConstantStrings) > 0) {
 						$columns[] = PhPgSql\PHPStan\Helper::getImplodedConstantString($keyConstantStrings);
@@ -67,9 +69,9 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 				}
 
 				// there are some columns and all is string type
-				if (($columns !== []) && (count($columns) === count($scopedType->getKeyTypes()))) {
+				if (($columns !== []) && (count($columns) === count($array->getKeyTypes()))) {
 					$types = [];
-					foreach ($scopedType->getValueTypes() as $value) {
+					foreach ($array->getValueTypes() as $value) {
 						$valueConstantStrings = $value->getConstantStrings();
 						if (count($valueConstantStrings) > 0) {
 							$types[] = PhPgSql\PHPStan\Helper::getImplodedConstantString($valueConstantStrings);
