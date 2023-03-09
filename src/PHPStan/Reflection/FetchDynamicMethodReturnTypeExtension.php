@@ -11,13 +11,13 @@ use PhpParser\Node\Expr\MethodCall;
 
 abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMethodReturnTypeExtension
 {
-	/** @var string */
-	private $dbRowClass;
+	/** @var Type\ObjectType */
+	private $dbRowObjectType;
 
 
 	public function __construct(string $dbRowClass)
 	{
-		$this->dbRowClass = $dbRowClass;
+		$this->dbRowObjectType = new Type\ObjectType($dbRowClass);
 	}
 
 
@@ -34,9 +34,9 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 	): Type\Type
 	{
 		if ($methodReflection->getName() === 'fetch') {
-			return new Type\UnionType([new Type\ObjectType($this->dbRowClass), new Type\NullType()]);
+			return new Type\UnionType([$this->dbRowObjectType, new Type\NullType()]);
 		} else if ($methodReflection->getName() === 'fetchAll') {
-			return new Type\ArrayType(new Type\IntegerType(), new Type\ObjectType($this->dbRowClass));
+			return Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(new Type\IntegerType(), $this->dbRowObjectType));
 		} else if ($methodReflection->getName() === 'fetchAssoc') {
 			if (count($methodCall->getArgs()) > 0) {
 				$arg = $methodCall->getArgs()[0]->value;
@@ -76,7 +76,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 					}
 					$reversedParts = array_slice($reversedParts, 2);
 				} else {
-					$type = new Type\ObjectType($this->dbRowClass);
+					$type = $this->dbRowObjectType;
 				}
 
 				$last = NULL;
@@ -121,7 +121,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 			// this should cover PHPStan itself
 			return new Type\ErrorType();
 		} else if ($methodReflection->getName() === 'getIterator') {
-			return new Type\IterableType(new Type\IntegerType(), new Type\ObjectType($this->dbRowClass));
+			return new Type\IterableType(new Type\IntegerType(), $this->dbRowObjectType);
 		}
 
 		// this should never happen
