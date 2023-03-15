@@ -30,101 +30,103 @@ final class Tests
 			$ownRowAll->ownRowFunction();
 		}
 
-		$checkInt = static function (int $int): void {
-			echo 'This is int: ' . $int;
-		};
-
-		/**
-		 * @param int|string $intString
-		 */
-		$checkIntString = static function ($intString): void {
-			echo 'This is int or string: ' . $intString;
-		};
-
-		$checkArray = static function (array $array): void {
-			echo 'This is arr: ' . implode(', ', $array);
-		};
-
 		foreach ($result->fetchAssoc('id') as $id => $ownRowAssoc) {
-			$checkIntString($id);
+			self::checkIntString($id);
 			$ownRowAssoc->ownRowFunction();
 		}
 
 		foreach ($result->fetchAssoc('[]') as $index => $ownRowAssoc) {
-			$checkInt($index);
+			self::checkInt($index);
 			$ownRowAssoc->ownRowFunction();
 		}
 
-		foreach ($result->fetchAssoc('type[]') as $type => $types) {
-			$checkIntString($type);
-			foreach ($types as $index => $ownRowAssoc) {
-				$checkInt($index);
+		foreach ($result->fetchAssoc('type[]') as $type => $listTypes) {
+			self::checkIntString($type);
+			self::checkList($listTypes);
+			foreach ($listTypes as $index => $ownRowAssoc) {
+				self::checkInt($index);
 				$ownRowAssoc->ownRowFunction();
 			}
 		}
 
-		foreach ($result->fetchAssoc('[]type') as $index => $type) {
-			$checkInt($index);
-			foreach ($type as $ownRowAssoc) {
-				$checkIntString($type);
+		foreach ($result->fetchAssoc('[]type') as $index => $types) {
+			self::checkInt($index);
+			foreach ($types as $type => $ownRowAssoc) {
+				self::checkIntString($type);
 				$ownRowAssoc->ownRowFunction();
 			}
 		}
+
+		self::checkList($result->fetchAssoc('[]type'));
 
 		foreach ($result->fetchAssoc('type|subtype') as $type => $subtypes) {
-			$checkIntString($type);
+			self::checkIntString($type);
 			foreach ($subtypes as $subtype => $ownRowAssoc) {
-				$checkIntString($subtype);
+				self::checkIntString($subtype);
 				$ownRowAssoc->ownRowFunction();
 			}
 		}
 
-		foreach ($result->fetchAssoc('country[]city') as $country => $indexesCities) {
-			$checkIntString($country);
-			foreach ($indexesCities as $index => $cities) {
-				$checkInt($index);
+		foreach ($result->fetchAssoc('country[]city') as $country => $listCities) {
+			self::checkIntString($country);
+			self::checkList($listCities);
+			foreach ($listCities as $index => $cities) {
+				self::checkInt($index);
 				foreach ($cities as $city => $ownRowAssoc) {
-					$checkIntString($city);
+					self::checkIntString($city);
 					$ownRowAssoc->ownRowFunction();
 				}
 			}
 		}
 
-		foreach ($result->fetchAssoc('country[]city=id') as $country => $indexesCities) {
-			$checkIntString($country);
-			foreach ($indexesCities as $index => $cities) {
-				$checkInt($index);
+		foreach ($result->fetchAssoc('country[]city=id') as $country => $listCities) {
+			self::checkIntString($country);
+			self::checkList($listCities);
+			foreach ($listCities as $index => $cities) {
+				self::checkInt($index);
 				foreach ($cities as $city => $id) {
-					$checkIntString($city);
-					$checkIntString($id);
+					self::checkIntString($city);
+					self::checkIntString($id);
 				}
 			}
 		}
 
-		foreach ($result->fetchAssoc('country[]city=[]') as $country => $indexesCities) {
-			$checkIntString($country);
-			foreach ($indexesCities as $index => $cities) {
-				$checkInt($index);
+		foreach ($result->fetchAssoc('country[]city=[]') as $country => $listCities) {
+			self::checkIntString($country);
+			self::checkList($listCities);
+			foreach ($listCities as $index => $cities) {
+				self::checkInt($index);
 				foreach ($cities as $city => $array) {
-					$checkIntString($city);
-					$checkArray($array);
+					self::checkIntString($city);
+					self::checkArray($array);
 				}
 			}
 		}
 
 		foreach ($result->fetchAssoc('id|country[]city=[]') as $id => $countries) {
-			$checkIntString($id);
-			foreach ($countries as $country => $indexesCities) {
-				$checkIntString($country);
-				foreach ($indexesCities as $index => $cities) {
-					$checkInt($index);
+			self::checkIntString($id);
+			foreach ($countries as $country => $listCities) {
+				self::checkIntString($country);
+				self::checkList($listCities);
+				foreach ($listCities as $index => $cities) {
+					self::checkInt($index);
 					foreach ($cities as $city => $array) {
-						$checkIntString($city);
-						$checkArray($array);
+						self::checkIntString($city);
+						self::checkArray($array);
 					}
 				}
 			}
 		}
+
+		foreach ($result->fetchPairs() as $key => $value) {
+			self::checkIntString($key);
+		}
+
+		foreach ($result->fetchPairs('column1', 'column2') as $key => $value) {
+			self::checkIntString($key);
+		}
+
+		self::checkList($result->fetchPairs(NULL, 'column'));
 
 		foreach ($result->getIterator() as $ownRowIteration) {
 			$ownRowIteration->ownRowFunction();
@@ -134,6 +136,39 @@ final class Tests
 		//foreach ($result as $ownRowIteration) {
 		//	$ownRowIteration->ownRowFunction();
 		//}
+	}
+
+
+	private static function	checkInt(int $int): void
+	{
+		echo 'This is int: ' . $int;
+	}
+
+
+	/**
+	 * @param int|string $intString
+	 */
+	private static function	checkIntString($intString): void
+	{
+		echo 'This is int or string: ' . $intString;
+	}
+
+
+	/**
+	 * @param array<int|string, mixed> $array
+	 */
+	private static function	checkArray(array $array): void
+	{
+		echo 'This is array: ' . implode(', ', $array);
+	}
+
+
+	/**
+	 * @param list<mixed> $list
+	 */
+	private static function	checkList(array $list): void
+	{
+		echo 'This is list: ' . implode(', ', $list);
 	}
 
 

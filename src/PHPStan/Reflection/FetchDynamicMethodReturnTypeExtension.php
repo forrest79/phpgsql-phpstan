@@ -23,7 +23,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 	public function isMethodSupported(MethodReflection $methodReflection): bool
 	{
-		return \in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'getIterator'], TRUE);
+		return \in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'getIterator'], TRUE);
 	}
 
 
@@ -39,11 +39,11 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 			return Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(new Type\IntegerType(), $this->dbRowObjectType));
 		} else if ($methodReflection->getName() === 'fetchAssoc') {
 			if (count($methodCall->getArgs()) > 0) {
-				$arg = $methodCall->getArgs()[0]->value;
-				$scopedType = $scope->getType($arg);
+				$keyArg = $methodCall->getArgs()[0]->value;
+				$keyScopedType = $scope->getType($keyArg);
 
 				// we're able to parse only constant string types, return default
-				$constantStrings = $scopedType->getConstantStrings();
+				$constantStrings = $keyScopedType->getConstantStrings();
 				if (count($constantStrings) === 0) {
 					return new Type\ArrayType(
 						new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
@@ -61,7 +61,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				$firstPart = \reset($parts);
 				$lastPart = \end($parts);
 				if (($firstPart === '=') || ($firstPart === '|') || ($lastPart === '=') || ($lastPart === '|')) {
-					return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
+					return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
 
 				$reversedParts = array_reverse($parts);
@@ -83,18 +83,18 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				foreach ($reversedParts as $part) {
 					if ($part === '[]') {
 						if (($last === '[]') || ($last === '|')) {
-							return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
+							return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 						}
 
-						$type =	new Type\ArrayType(
+						$type =	Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(
 							new Type\IntegerType(),
 							$type
-						);
+						));
 
 						$last = $part;
 					} else if ($part === '|') {
 						if (($last === '[]') || ($last === '|')) {
-							return new Type\ErrorType(); // litte hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
+							return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 						}
 
 						$type = new Type\ArrayType(
@@ -120,6 +120,27 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 			// this should cover PHPStan itself
 			return new Type\ErrorType();
+		} else if ($methodReflection->getName() === 'fetchPairs') {
+			if (count($methodCall->getArgs()) === 1) {
+				return new Type\ErrorType(); // little hack, exception is thrown in fetchPairs() - this should be nicer as PHPStan rule, but we need to care about this here too
+			} else if (count($methodCall->getArgs()) === 2) {
+				$keyArg = $methodCall->getArgs()[0]->value;
+				$keyScopedType = $scope->getType($keyArg);
+
+				$valueArg = $methodCall->getArgs()[1]->value;
+				$valueScopedType = $scope->getType($valueArg);
+
+				if ($keyScopedType->isNull()->no() && $valueScopedType->isNull()->yes()) {
+					return new Type\ErrorType(); // little hack, exception is thrown in fetchPairs() - this should be nicer as PHPStan rule, but we need to care about this here too
+				} else if ($keyScopedType->isNull()->yes() && $valueScopedType->isNull()->no()) {
+					return Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(new Type\IntegerType(), new Type\MixedType()));
+				}
+			}
+
+			return new Type\ArrayType(
+				new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
+				new Type\MixedType()
+			);
 		} else if ($methodReflection->getName() === 'getIterator') {
 			return new Type\IterableType(new Type\IntegerType(), $this->dbRowObjectType);
 		}
