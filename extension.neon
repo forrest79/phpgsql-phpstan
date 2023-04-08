@@ -16,29 +16,29 @@ parameters:
 			fluentQueryClass: Forrest79\PhPgSql\Fluent\QueryExecute
 
 services:
-	Forrest79PhPgSqlPHPStanReflectionDbResultDynamicMethodReturnTypeExtension:
-		class: Forrest79\PhPgSql\PHPStan\Reflection\DbResultDynamicMethodReturnTypeExtension
+	Forrest79PhPgSqlPHPStanTypeDbResultDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Type\DbResultDynamicMethodReturnTypeExtension
 		arguments:
 			dbRowClass: %forrest79.phpgsql.dbRowClass%
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
-	Forrest79PhPgSqlPHPStanReflectionFluentQueryExecuteDynamicMethodReturnTypeExtension:
-		class: Forrest79\PhPgSql\PHPStan\Reflection\FluentQueryExecuteDynamicMethodReturnTypeExtension
+	Forrest79PhPgSqlPHPStanTypeFluentQueryExecuteDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Type\FluentQueryExecuteDynamicMethodReturnTypeExtension
 		arguments:
 			dbRowClass: %forrest79.phpgsql.dbRowClass%
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
-	Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
-		class: Forrest79\PhPgSql\PHPStan\Reflection\FluentComplexDynamicMethodReturnTypeExtension
+	Forrest79PhPgSqlPHPStanTypeFluentComplexDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Type\FluentComplexDynamicMethodReturnTypeExtension
 		arguments:
 			fluentQueryClass: %forrest79.phpgsql.fluentQueryClass%
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
-	Forrest79PhPgSqlPHPStanAnalyserIsDbRowFunctionTypeSpecifyingExtension:
-		class: Forrest79\PhPgSql\PHPStan\Analyser\IsDbRowFunctionTypeSpecifyingExtension
+	Forrest79PhPgSqlPHPStanTypeIsDbRowFunctionTypeSpecifyingExtension:
+		class: Forrest79\PhPgSql\PHPStan\Type\IsDbRowFunctionTypeSpecifyingExtension
 		arguments:
 			dbRowClass: %forrest79.phpgsql.dbRowClass%
 		tags:

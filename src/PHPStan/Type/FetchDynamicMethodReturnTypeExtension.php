@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Forrest79\PhPgSql\PHPStan\Reflection;
+namespace Forrest79\PhPgSql\PHPStan\Type;
 
 use Forrest79\PhPgSql;
 use PHPStan\Analyser\Scope;

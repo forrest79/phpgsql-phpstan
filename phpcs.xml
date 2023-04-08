@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<ruleset name="PhPgSql">
+<ruleset name="PhPgSql-PHPStan">
 	<rule ref="./vendor/forrest79/phpcs/Forrest79CodingStandard/ruleset.xml"/>
 
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
@@ -13,21 +13,21 @@
 
 	<!-- PHP 8.0 -->
 	<rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma">
-		<exclude-pattern>src/PHPStan/Reflection/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
 	</rule>
 
 	<!-- PHP 8.0 -->
 	<rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration.MissingTrailingComma">
-		<exclude-pattern>src/PHPStan/Analyser/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Reflection/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Reflection/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
 	</rule>
 
 	<rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
-		<exclude-pattern>src/PHPStan/Analyser/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
 		<exclude-pattern>src/PHPStan/PhpDoc/DbRowTypeNodeResolverExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Reflection/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Reflection/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
 	</rule>
 
 	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable">
@@ -42,9 +42,9 @@
 
 	<!-- PHP 8.0 -->
 	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
-		<exclude-pattern>src/PHPStan/Analyser/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
 		<exclude-pattern>src/PHPStan/PhpDoc/DbRowTypeNodeResolverExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Reflection/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Reflection/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
+		<exclude-pattern>src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
 	</rule>
 </ruleset>

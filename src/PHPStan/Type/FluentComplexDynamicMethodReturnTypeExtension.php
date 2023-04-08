@@ -1,16 +1,14 @@
 <?php declare(strict_types=1);
 
-namespace Forrest79\PhPgSql\PHPStan\Reflection;
+namespace Forrest79\PhPgSql\PHPStan\Type;
 
 use Forrest79\PhPgSql;
 use PHPStan\Analyser\Scope;
 use PHPStan\Reflection\MethodReflection;
-use PHPStan\Type\DynamicMethodReturnTypeExtension;
-use PHPStan\Type\ObjectType;
-use PHPStan\Type\Type;
+use PHPStan\Type;
 use PhpParser\Node\Expr\MethodCall;
 
-final class FluentComplexDynamicMethodReturnTypeExtension implements DynamicMethodReturnTypeExtension
+final class FluentComplexDynamicMethodReturnTypeExtension implements Type\DynamicMethodReturnTypeExtension
 {
 	/** @var string */
 	private $fluentQueryClass;
@@ -38,9 +36,9 @@ final class FluentComplexDynamicMethodReturnTypeExtension implements DynamicMeth
 		MethodReflection $methodReflection,
 		MethodCall $methodCall,
 		Scope $scope
-	): Type
+	): Type\Type
 	{
-		return new ObjectType($this->fluentQueryClass);
+		return new Type\ObjectType($this->fluentQueryClass);
 	}
 
 }

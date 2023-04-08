@@ -3,11 +3,11 @@
 namespace Forrest79\PhPgSql\PHPStan\PhpDoc;
 
 use PHPStan\Analyser\NameScope;
-use PHPStan\PhpDoc\TypeNodeResolverExtension;
+use PHPStan\PhpDoc;
 use PHPStan\PhpDocParser\Ast;
 use PHPStan\Type;
 
-final class DbRowTypeNodeResolverExtension implements TypeNodeResolverExtension
+final class DbRowTypeNodeResolverExtension implements PhpDoc\TypeNodeResolverExtension
 {
 	/** @var string */
 	private $dbRowClass;

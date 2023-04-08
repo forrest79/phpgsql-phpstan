@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Forrest79\PhPgSql\PHPStan\Analyser;
+namespace Forrest79\PhPgSql\PHPStan\Type;
 
 use DG;
 use Forrest79\PhPgSql;
