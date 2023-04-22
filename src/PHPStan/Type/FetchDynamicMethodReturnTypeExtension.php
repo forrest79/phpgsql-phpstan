@@ -23,7 +23,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 	public function isMethodSupported(MethodReflection $methodReflection): bool
 	{
-		return \in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'getIterator'], TRUE);
+		return \in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'fetchIterator', 'getIterator'], TRUE);
 	}
 
 
@@ -141,7 +141,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
 				new Type\MixedType()
 			);
-		} else if ($methodReflection->getName() === 'getIterator') {
+		} else if (in_array($methodReflection->getName(), ['fetchIterator', 'getIterator'], TRUE)) {
 			return new Type\IterableType(new Type\IntegerType(), $this->dbRowObjectType);
 		}
 

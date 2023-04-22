@@ -132,10 +132,9 @@ final class Tests
 			$ownRowIteration->ownRowFunction();
 		}
 
-		// Can't be simply done right now :-(
-		//foreach ($result as $ownRowIteration) {
-		//	$ownRowIteration->ownRowFunction();
-		//}
+		foreach ($result->fetchIterator() as $ownRowIteration) {
+			$ownRowIteration->ownRowFunction();
+		}
 	}
 
 
@@ -191,10 +190,9 @@ final class Tests
 			$ownRowIteration->ownRowFunction();
 		}
 
-		// Can't be simple done right now :-( Use `assert(is_dbrow(...));`
-		//foreach ($ownQuery as $ownRowIteration) {
-		//	$ownRowIteration->ownRowFunction();
-		//}
+		foreach ($ownQuery->fetchIterator() as $ownRowIteration) {
+			$ownRowIteration->ownRowFunction();
+		}
 	}
 
 
@@ -217,12 +215,10 @@ final class Tests
 	}
 
 
-	public static function testIsDbRowFunctionTypeSpecifyingExtension2(OwnQuery $ownQuery): void
+	public static function testIsDbRowFunctionTypeSpecifyingExtension2(Db\Row $row): void
 	{
-		foreach ($ownQuery as $ownRowIteration) {
-			/** @var DbRow $ownRowIteration */
-			$ownRowIteration->ownRowFunction();
-		}
+		/** @var DbRow $row */
+		$row->ownRowFunction();
 	}
 
 }

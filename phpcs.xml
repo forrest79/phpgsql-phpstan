@@ -11,6 +11,10 @@
 		</properties>
 	</rule>
 
+	<rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment">
+		<exclude-pattern>tests/Tests.php</exclude-pattern>
+	</rule>
+
 	<!-- PHP 8.0 -->
 	<rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma">
 		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
