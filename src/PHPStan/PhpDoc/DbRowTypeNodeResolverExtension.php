@@ -9,8 +9,7 @@ use PHPStan\Type;
 
 final class DbRowTypeNodeResolverExtension implements PhpDoc\TypeNodeResolverExtension
 {
-	/** @var string */
-	private $dbRowClass;
+	private string $dbRowClass;
 
 
 	public function __construct(string $dbRowClass)
@@ -19,7 +18,7 @@ final class DbRowTypeNodeResolverExtension implements PhpDoc\TypeNodeResolverExt
 	}
 
 
-	public function resolve(Ast\Type\TypeNode $typeNode, NameScope $nameScope): ?Type\Type
+	public function resolve(Ast\Type\TypeNode $typeNode, NameScope $nameScope): Type\Type|NULL
 	{
 		if (($typeNode instanceof Ast\Type\IdentifierTypeNode) && ($typeNode->name === 'DbRow')) {
 			return new Type\ObjectType($this->dbRowClass);

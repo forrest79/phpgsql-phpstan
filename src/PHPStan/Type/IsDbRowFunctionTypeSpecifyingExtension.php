@@ -12,14 +12,11 @@ use Tester;
 
 final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeSpecifyingExtension, Analyser\TypeSpecifierAwareExtension
 {
-	/** @var bool */
-	private static $bypassFinals = FALSE;
+	private static bool $bypassFinals = FALSE;
 
-	/** @var string */
-	private $dbRowClass;
+	private string $dbRowClass;
 
-	/** @var Analyser\TypeSpecifier */
-	private $typeSpecifier;
+	private Analyser\TypeSpecifier $typeSpecifier;
 
 
 	public function __construct(string $dbRowClass)
@@ -31,7 +28,7 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 	public function isFunctionSupported(
 		Reflection\FunctionReflection $functionReflection,
 		Node\Expr\FuncCall $node,
-		Analyser\TypeSpecifierContext $context
+		Analyser\TypeSpecifierContext $context,
 	): bool
 	{
 		return ($functionReflection->getName() === 'is_dbrow') && isset($node->getArgs()[0]);
@@ -42,7 +39,7 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 		Reflection\FunctionReflection $functionReflection,
 		Node\Expr\FuncCall $node,
 		Analyser\Scope $scope,
-		Analyser\TypeSpecifierContext $context
+		Analyser\TypeSpecifierContext $context,
 	): Analyser\SpecifiedTypes
 	{
 		$args = $node->getArgs();

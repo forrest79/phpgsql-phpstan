@@ -144,10 +144,7 @@ final class Tests
 	}
 
 
-	/**
-	 * @param int|string $intString
-	 */
-	private static function	checkIntString($intString): void
+	private static function	checkIntString(int|string $intString): void
 	{
 		echo 'This is int or string: ' . $intString;
 	}
@@ -199,17 +196,22 @@ final class Tests
 	public static function testIsDbRowFunctionTypeSpecifyingExtension(OwnQuery $ownQuery): void
 	{
 		foreach ($ownQuery as $ownRowIteration) {
-			\assert(\is_dbrow($ownRowIteration));
+			assert(is_dbrow($ownRowIteration));
 			$ownRowIteration->ownRowFunction();
 		}
 
 		$row = $ownQuery->fetch();
-		\assert(\is_dbrow($row, ['columnInt' => '?int', 'columnString' => 'string', 'columnFloat' => 'float', 'columnDatetime' => \DateTime::class]));
+		assert(is_dbrow($row, ['columnInt' => '?int', 'columnString' => 'string', 'columnFloat' => 'float', 'columnDatetime' => \DateTime::class]));
 		self::testTypes($row->columnInt, $row->columnString, $row->columnFloat, $row->columnDatetime);
 	}
 
 
-	private static function testTypes(?int $nullableInteger, string $text, float $numeric, \DateTime $dateTime): void
+	private static function testTypes(
+		int|NULL $nullableInteger,
+		string $text,
+		float $numeric,
+		\DateTime $dateTime,
+	): void
 	{
 		var_dump($nullableInteger, $text, $nullableInteger, $numeric, $dateTime);
 	}

@@ -8,7 +8,7 @@ final class Helper
 {
 
 	/**
-	 * @param array<Type\Constant\ConstantStringType> $constantStrings
+	 * @param list<Type\Constant\ConstantStringType> $constantStrings
 	 */
 	public static function getImplodedConstantString(array $constantStrings): string
 	{

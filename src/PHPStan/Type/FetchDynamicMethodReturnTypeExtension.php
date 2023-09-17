@@ -11,8 +11,7 @@ use PhpParser\Node\Expr\MethodCall;
 
 abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMethodReturnTypeExtension
 {
-	/** @var Type\ObjectType */
-	private $dbRowObjectType;
+	private Type\ObjectType $dbRowObjectType;
 
 
 	public function __construct(string $dbRowClass)
@@ -23,14 +22,14 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 	public function isMethodSupported(MethodReflection $methodReflection): bool
 	{
-		return \in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'fetchIterator', 'getIterator'], TRUE);
+		return in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'fetchIterator', 'getIterator'], TRUE);
 	}
 
 
 	public function getTypeFromMethodCall(
 		MethodReflection $methodReflection,
 		MethodCall $methodCall,
-		Scope $scope
+		Scope $scope,
 	): Type\Type
 	{
 		if ($methodReflection->getName() === 'fetch') {
@@ -47,19 +46,19 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				if (count($constantStrings) === 0) {
 					return new Type\ArrayType(
 						new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
-						new Type\MixedType()
+						new Type\MixedType(),
 					);
 				}
 
 				$assocDesc = PhPgSql\PHPStan\Helper::getImplodedConstantString($constantStrings);
 
-				$parts = \preg_split('#(\[\]|=|\|)#', $assocDesc, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
+				$parts = preg_split('#(\[\]|=|\|)#', $assocDesc, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
 				if (($parts === FALSE) || ($parts === [])) {
 					return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
 
-				$firstPart = \reset($parts);
-				$lastPart = \end($parts);
+				$firstPart = reset($parts);
+				$lastPart = end($parts);
 				if (($firstPart === '=') || ($firstPart === '|') || ($lastPart === '=') || ($lastPart === '|')) {
 					return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
@@ -69,7 +68,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 					if ($reversedParts[0] === '[]') {
 						$type = new Type\ArrayType(
 							new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
-							new Type\MixedType()
+							new Type\MixedType(),
 						);
 					} else {
 						$type = new Type\MixedType();
@@ -88,7 +87,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 						$type =	Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(
 							new Type\IntegerType(),
-							$type
+							$type,
 						));
 
 						$last = $part;
@@ -99,7 +98,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 						$type = new Type\ArrayType(
 							new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
-							$type
+							$type,
 						);
 
 						$last = $part;
@@ -107,7 +106,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 						if ($last !== '|') {
 							$type = new Type\ArrayType(
 								new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
-								$type
+								$type,
 							);
 						}
 
@@ -139,14 +138,14 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 			return new Type\ArrayType(
 				new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
-				new Type\MixedType()
+				new Type\MixedType(),
 			);
 		} else if (in_array($methodReflection->getName(), ['fetchIterator', 'getIterator'], TRUE)) {
 			return new Type\IterableType(new Type\IntegerType(), $this->dbRowObjectType);
 		}
 
 		// this should never happen
-		throw new ShouldNotHappenException(\sprintf('Unsupported method \'%s\' in FetchDynamicMethodReturnTypeExtension.', $methodReflection->getName()));
+		throw new ShouldNotHappenException(sprintf('Unsupported method \'%s\' in FetchDynamicMethodReturnTypeExtension.', $methodReflection->getName()));
 	}
 
 }

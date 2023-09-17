@@ -10,45 +10,4 @@
 			"/>
 		</properties>
 	</rule>
-
-	<rule ref="SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment">
-		<exclude-pattern>tests/Tests.php</exclude-pattern>
-	</rule>
-
-	<!-- PHP 8.0 -->
-	<rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInCall.MissingTrailingComma">
-		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-	</rule>
-
-	<!-- PHP 8.0 -->
-	<rule ref="SlevomatCodingStandard.Functions.RequireTrailingCommaInDeclaration.MissingTrailingComma">
-		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
-	</rule>
-
-	<rule ref="SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter">
-		<exclude-pattern>src/PHPStan/PhpDoc/DbRowTypeNodeResolverExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
-	</rule>
-
-	<rule ref="SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable">
-		<exclude-pattern>tests/Tests.php</exclude-pattern>
-	</rule>
-
-	<!-- PHP 8.0 -->
-	<rule ref="SlevomatCodingStandard.TypeHints.ParameterTypeHint.MissingNativeTypeHint">
-		<exclude-pattern>src/functions.php</exclude-pattern>
-		<exclude-pattern>tests/Tests.php</exclude-pattern>
-	</rule>
-
-	<!-- PHP 8.0 -->
-	<rule ref="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint">
-		<exclude-pattern>src/PHPStan/PhpDoc/DbRowTypeNodeResolverExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/FetchDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php</exclude-pattern>
-		<exclude-pattern>src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php</exclude-pattern>
-	</rule>
 </ruleset>

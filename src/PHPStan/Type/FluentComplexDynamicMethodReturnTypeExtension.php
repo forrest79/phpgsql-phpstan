@@ -10,8 +10,7 @@ use PhpParser\Node\Expr\MethodCall;
 
 final class FluentComplexDynamicMethodReturnTypeExtension implements Type\DynamicMethodReturnTypeExtension
 {
-	/** @var string */
-	private $fluentQueryClass;
+	private string $fluentQueryClass;
 
 
 	public function __construct(string $fluentQueryClass)
@@ -35,7 +34,7 @@ final class FluentComplexDynamicMethodReturnTypeExtension implements Type\Dynami
 	public function getTypeFromMethodCall(
 		MethodReflection $methodReflection,
 		MethodCall $methodCall,
-		Scope $scope
+		Scope $scope,
 	): Type\Type
 	{
 		return new Type\ObjectType($this->fluentQueryClass);
