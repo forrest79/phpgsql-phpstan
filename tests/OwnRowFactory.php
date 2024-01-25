@@ -9,9 +9,8 @@ final class OwnRowFactory implements Db\RowFactory
 
 	/**
 	 * @param array<string, string|NULL> $rawValues
-	 * @return OwnRow
 	 */
-	public function createRow(Db\ColumnValueParser $columnValueParser, array $rawValues): Db\Row
+	public function createRow(Db\ColumnValueParser $columnValueParser, array $rawValues): OwnRow
 	{
 		return new OwnRow($columnValueParser, $rawValues);
 	}

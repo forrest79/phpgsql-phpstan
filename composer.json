@@ -15,10 +15,10 @@
 		"phpstan/phpstan": "^1.10"
 	},
 	"require-dev": {
-		"dg/bypass-finals": "^1.4",
-		"forrest79/phpcs": "^1.2",
-		"forrest79/phpcs-ignores": "^0.3",
-		"forrest79/phpgsql": "^1.0",
+		"dg/bypass-finals": "^1.5",
+		"forrest79/phpcs": "^1.5",
+		"forrest79/phpcs-ignores": "^0.5",
+		"forrest79/phpgsql": "^1.4",
 		"phpstan/phpstan-strict-rules": "^1.5"
 	},
 	"suggest": {
