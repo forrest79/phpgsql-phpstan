@@ -12,14 +12,14 @@
 	],
 	"require": {
 		"php": "^8.0",
-		"phpstan/phpstan": "^1.10"
+		"phpstan/phpstan": "^1.11"
 	},
 	"require-dev": {
 		"dg/bypass-finals": "^1.5",
 		"forrest79/phpcs": "^1.5",
 		"forrest79/phpcs-ignores": "^0.5",
 		"forrest79/phpgsql": "^1.4",
-		"phpstan/phpstan-strict-rules": "^1.5"
+		"phpstan/phpstan-strict-rules": "^1.6"
 	},
 	"suggest": {
 		"dg/bypass-finals": "Needed for is_dbrow() when used with withProperties and custom row is marked as final",
