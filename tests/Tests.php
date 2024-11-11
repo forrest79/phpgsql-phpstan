@@ -86,7 +86,7 @@ final class Tests
 				self::checkInt($index);
 				foreach ($cities as $city => $id) {
 					self::checkIntString($city);
-					self::checkIntString($id);
+					self::checkMixed($id);
 				}
 			}
 		}
@@ -147,6 +147,15 @@ final class Tests
 	private static function	checkIntString(int|string $intString): void
 	{
 		echo 'This is int or string: ' . $intString;
+	}
+
+
+	/**
+	 * Checking mixed is not really necessary - mixed can be everything
+	 */
+	private static function	checkMixed(mixed $mixed): void
+	{
+		echo 'Mixed type: ' . gettype($mixed);
 	}
 
 
