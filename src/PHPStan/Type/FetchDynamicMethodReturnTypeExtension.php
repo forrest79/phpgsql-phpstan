@@ -35,7 +35,10 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 		if ($methodReflection->getName() === 'fetch') {
 			return new Type\UnionType([$this->dbRowObjectType, new Type\NullType()]);
 		} else if ($methodReflection->getName() === 'fetchAll') {
-			return Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(new Type\IntegerType(), $this->dbRowObjectType));
+			return Type\TypeCombinator::intersect(
+				new Type\ArrayType(new Type\IntegerType(), $this->dbRowObjectType),
+				new Type\Accessory\AccessoryArrayListType(),
+			);
 		} else if ($methodReflection->getName() === 'fetchAssoc') {
 			if (count($methodCall->getArgs()) > 0) {
 				$keyArg = $methodCall->getArgs()[0]->value;
@@ -85,10 +88,10 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 							return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 						}
 
-						$type =	Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(
-							new Type\IntegerType(),
-							$type,
-						));
+						$type =	Type\TypeCombinator::intersect(
+							new Type\ArrayType(new Type\IntegerType(), $type),
+							new Type\Accessory\AccessoryArrayListType(),
+						);
 
 						$last = $part;
 					} else if ($part === '|') {
@@ -132,7 +135,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				if ($keyScopedType->isNull()->no() && $valueScopedType->isNull()->yes()) {
 					return new Type\ErrorType(); // little hack, exception is thrown in fetchPairs() - this should be nicer as PHPStan rule, but we need to care about this here too
 				} else if ($keyScopedType->isNull()->yes() && $valueScopedType->isNull()->no()) {
-					return Type\Accessory\AccessoryArrayListType::intersectWith(new Type\ArrayType(new Type\IntegerType(), new Type\MixedType()));
+					return Type\TypeCombinator::intersect(new Type\ArrayType(new Type\IntegerType(), new Type\MixedType()), new Type\Accessory\AccessoryArrayListType());
 				}
 			}
 

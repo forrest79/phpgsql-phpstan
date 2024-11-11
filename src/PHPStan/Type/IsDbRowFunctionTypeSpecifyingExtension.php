@@ -97,7 +97,7 @@ final class IsDbRowFunctionTypeSpecifyingExtension implements Type\FunctionTypeS
 
 		$type = new Type\ObjectType($dbRowClass);
 
-		return $this->typeSpecifier->create($expr, $type, Analyser\TypeSpecifierContext::createTruthy());
+		return $this->typeSpecifier->create($expr, $type, Analyser\TypeSpecifierContext::createTruthy(), $scope);
 	}
 
 
