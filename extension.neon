@@ -37,13 +37,6 @@ services:
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
-	Forrest79PhPgSqlPHPStanTypeIsDbRowFunctionTypeSpecifyingExtension:
-		class: Forrest79\PhPgSql\PHPStan\Type\IsDbRowFunctionTypeSpecifyingExtension
-		arguments:
-			dbRowClass: %forrest79.phpgsql.dbRowClass%
-		tags:
-			- phpstan.typeSpecifier.functionTypeSpecifyingExtension
-
 	Forrest79PhPgSqlPHPStanPhpDocDbRowTypeNodeResolverExtension:
 		class: Forrest79\PhPgSql\PHPStan\PhpDoc\DbRowTypeNodeResolverExtension
 		arguments:

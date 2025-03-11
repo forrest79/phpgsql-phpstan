@@ -16,20 +16,15 @@
 	},
 	"require-dev": {
 		"dg/bypass-finals": "^1.5",
-		"forrest79/phpcs": "^1.5",
+		"forrest79/phpcs": "^1.7",
 		"forrest79/phpcs-ignores": "^0.5",
 		"forrest79/phpgsql": "^1.4",
 		"phpstan/phpstan-strict-rules": "^2.0"
 	},
-	"suggest": {
-		"dg/bypass-finals": "Needed for is_dbrow() when used with withProperties and custom row is marked as final",
-		"nette/tester": "Can be used instead of db/bypass-finals"
-	},
 	"autoload": {
 		"psr-4": {
 			"Forrest79\\PhPgSql\\": "src/"
-		},
-		"files": ["src/functions.php"]
+		}
 	},
 	"autoload-dev": {
 		"psr-4": {

@@ -24,24 +24,6 @@ ignoreErrors:
 		path: src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php
 
 	-
-		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
-		message: Unused parameter $context.
-		count: 2
-		path: src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php
-
-	-
-		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
-		message: Unused parameter $functionReflection.
-		count: 1
-		path: src/PHPStan/Type/IsDbRowFunctionTypeSpecifyingExtension.php
-
-	-
-		sniff: Generic.PHP.ForbiddenFunctions.Found
-		message: 'The use of function var_dump() is forbidden'
-		count: 1
-		path: tests/Tests.php
-
-	-
 		sniff: SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment
 		message: No assignment to $row variable before or after the documentation comment.
 		count: 1

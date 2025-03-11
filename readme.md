@@ -67,42 +67,7 @@ services:
             fluentQueryClass: MyOwn\PhPgSql\Fluent\QueryXyz
 ```
 
-You can also use simple `Row` type narrowing function `is_dbrow($row[, $expectedProperties])`. It returns `bool` but it's recommended to use this always only with the `assert()` function. This package will be probably missing in your production vendor so `is_dbrow` function will be missing too and a PHP script will crash on this. With correct production settings for the `assert()` function is calling `is_dbrow()` omitted and your production code will be correct.
-
-In PHP this function only checks if `$row` is instance of `Forrest79\PhPgSql\Db\Row` and if you specify `$expectedProperties` (keys are column names and values are PHP types as string) it will check, if row has defined exactly expected columns (in PHP there is no types check, it's only for PHPStan).
-
-The real magic is hidden in PHPStan extension. This function will narrow `$row` type as `Forrest79\PhPgSql\Db\Row` or your custom row object. And if you specify also properties, this will be correctly typed for PHPStan - originally all properties are `mixed`.
-
-```php
-foreach ($someQuery as $row) {
-    // here is $row as Forrest79\PhPgSql\Db\Row for PHPStan
-    assert(is_dbrow($row));
-    // here is as your custom row object
-}
-
-$row = $someQuery->select(['columnInt', 'columnString', 'columnFloat', 'columnDatetime'])->...->fetch();
-$row->columnInt; // mixed for PHPStan
-$row->columnString; // mixed for PHPStan
-$row->columnFloat; // mixed for PHPStan
-$row->columnDatetime; // mixed for PHPStan
-
-assert(is_dbrow($row, ['columnInt' => '?int', 'columnString' => 'string', 'columnFloat' => 'float', 'columnDatetime' => \DateTime::class]));
-$row->columnInt; // int or NULL for PHPStan
-$row->columnString; // string for PHPStan
-$row->columnFloat; // float for PHPStan
-$row->columnDatetime; // \DateTime for PHPStan
-```
-
-To set only this extension use:
-
-```yaml
-services:
-    Forrest79PhPgSqlPHPStanAnalyserIsDbRowFunctionTypeSpecifyingExtension:
-        arguments:
-            dbRowClass: MyOwn\PhPgSql\Db\RowXyz
-```
-
-Or you can use simple `DbRow` annotation.
+You can use simple `DbRow` annotation to narrow the `Row` object.
 
 ```php
 foreach ($someQuery as $row) {
