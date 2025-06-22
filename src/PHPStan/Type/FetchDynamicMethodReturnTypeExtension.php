@@ -22,7 +22,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 
 	public function isMethodSupported(MethodReflection $methodReflection): bool
 	{
-		return in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'fetchIterator', 'getIterator'], TRUE);
+		return in_array($methodReflection->getName(), ['fetch', 'fetchAll', 'fetchAssoc', 'fetchPairs', 'fetchIterator', 'getIterator'], true);
 	}
 
 
@@ -56,7 +56,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				$assocDesc = PhPgSql\PHPStan\Helper::getImplodedConstantString($constantStrings);
 
 				$parts = preg_split('#(\[\]|=|\|)#', $assocDesc, -1, \PREG_SPLIT_DELIM_CAPTURE | \PREG_SPLIT_NO_EMPTY);
-				if (($parts === FALSE) || ($parts === [])) {
+				if (($parts === false) || ($parts === [])) {
 					return new Type\ErrorType(); // little hack, exception is thrown in fetchAssoc() - this should be nicer as PHPStan rule, but we need to care about this here too
 				}
 
@@ -81,7 +81,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 					$type = $this->dbRowObjectType;
 				}
 
-				$last = NULL;
+				$last = null;
 				foreach ($reversedParts as $part) {
 					if ($part === '[]') {
 						if (($last === '[]') || ($last === '|')) {
@@ -113,7 +113,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 							);
 						}
 
-						$last = NULL;
+						$last = null;
 					}
 				}
 
@@ -143,7 +143,7 @@ abstract class FetchDynamicMethodReturnTypeExtension implements Type\DynamicMeth
 				new Type\UnionType([new Type\IntegerType(), new Type\StringType()]),
 				new Type\MixedType(),
 			);
-		} else if (in_array($methodReflection->getName(), ['fetchIterator', 'getIterator'], TRUE)) {
+		} else if (in_array($methodReflection->getName(), ['fetchIterator', 'getIterator'], true)) {
 			return new Type\IterableType(new Type\IntegerType(), $this->dbRowObjectType);
 		}
 

@@ -18,13 +18,13 @@ final class DbRowTypeNodeResolverExtension implements PhpDoc\TypeNodeResolverExt
 	}
 
 
-	public function resolve(Ast\Type\TypeNode $typeNode, NameScope $nameScope): Type\Type|NULL
+	public function resolve(Ast\Type\TypeNode $typeNode, NameScope $nameScope): Type\Type|null
 	{
 		if (($typeNode instanceof Ast\Type\IdentifierTypeNode) && ($typeNode->name === 'DbRow')) {
 			return new Type\ObjectType($this->dbRowClass);
 		}
 
-		return NULL;
+		return null;
 	}
 
 }

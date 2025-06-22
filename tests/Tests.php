@@ -22,7 +22,7 @@ final class Tests
 	public static function testDbResultDynamicMethodReturnTypeExtension(Db\Result $result): void
 	{
 		$ownRow = $result->fetch();
-		\assert($ownRow !== NULL);
+		\assert($ownRow !== null);
 
 		$ownRow->ownRowFunction();
 
@@ -126,7 +126,7 @@ final class Tests
 			self::checkIntString($key);
 		}
 
-		self::checkList($result->fetchPairs(NULL, 'column'));
+		self::checkList($result->fetchPairs(null, 'column'));
 
 		foreach ($result->getIterator() as $ownRowIteration) {
 			$ownRowIteration->ownRowFunction();
@@ -180,7 +180,7 @@ final class Tests
 	public static function testFluentQueryExecuteDynamicMethodReturnTypeExtension(OwnQuery $ownQuery): void
 	{
 		$ownRow = $ownQuery->fetch();
-		\assert($ownRow !== NULL);
+		\assert($ownRow !== null);
 
 		$ownRow->ownRowFunction();
 
