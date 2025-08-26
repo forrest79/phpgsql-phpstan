@@ -1,12 +1,6 @@
 ignoreErrors:
 	-
 		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
-		message: Unused parameter $nameScope.
-		count: 1
-		path: src/PHPStan/PhpDoc/DbRowTypeNodeResolverExtension.php
-
-	-
-		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
 		message: Unused parameter $methodCall.
 		count: 1
 		path: src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php
@@ -22,12 +16,6 @@ ignoreErrors:
 		message: Unused parameter $scope.
 		count: 1
 		path: src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php
-
-	-
-		sniff: SlevomatCodingStandard.Commenting.InlineDocCommentDeclaration.NoAssignment
-		message: No assignment to $row variable before or after the documentation comment.
-		count: 1
-		path: tests/Tests.php
 
 	-
 		sniff: SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable

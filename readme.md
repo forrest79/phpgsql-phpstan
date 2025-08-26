@@ -66,24 +66,3 @@ services:
         arguments:
             fluentQueryClass: MyOwn\PhPgSql\Fluent\QueryXyz
 ```
-
-You can use simple `DbRow` annotation to narrow the `Row` object.
-
-```php
-foreach ($someQuery as $row) {
-    // here is $row as Forrest79\PhPgSql\Db\Row for PHPStan
-    /** @var DbRow $row */
-    // here is as your custom row object
-}
-```
-
-Use `DbRow` pseudo-type whenever you want, params, returns, vars...
-
-To set only this extension use:
-
-```yaml
-services:
-    Forrest79PhPgSqlPHPStanPhpDocDbRowTypeNodeResolverExtension:
-        arguments:
-            dbRowClass: MyOwn\PhPgSql\Db\RowXyz
-```

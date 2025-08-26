@@ -201,11 +201,4 @@ final class Tests
 		}
 	}
 
-
-	public static function testDbRowAnnotation(Db\Row $row): void
-	{
-		/** @var DbRow $row */
-		$row->ownRowFunction();
-	}
-
 }
