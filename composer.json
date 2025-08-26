@@ -15,7 +15,6 @@
 		"phpstan/phpstan": "^2.0"
 	},
 	"require-dev": {
-		"dg/bypass-finals": "^1.5",
 		"forrest79/phpcs": "^2.0",
 		"forrest79/phpcs-ignores": "^0.5",
 		"forrest79/phpgsql": "^1.4",
