@@ -12,5 +12,5 @@ parameters:
 	# Settings for tests
 	forrest79:
 		phpgsql:
-			dbRowClass: Forrest79\PhPgSql\Tests\OwnRow
-			fluentQueryClass: Forrest79\PhPgSql\Tests\OwnQuery
+			dbRowClass: Forrest79\PhPgSql\PHPStan\Tests\OwnRow
+			fluentQueryClass: Forrest79\PhPgSql\PHPStan\Tests\OwnQuery

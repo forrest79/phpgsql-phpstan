@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace Forrest79\PhPgSql\Tests;
+namespace Forrest79\PhPgSql\PHPStan\Tests;
 
 require __DIR__ . '/../vendor/autoload.php';
 

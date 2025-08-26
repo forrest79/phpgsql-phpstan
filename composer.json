@@ -23,12 +23,12 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"Forrest79\\PhPgSql\\": "src/"
+			"Forrest79\\PhPgSql\\PHPStan\\": "src/"
 		}
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"Forrest79\\PhPgSql\\Tests\\": "tests/"
+			"Forrest79\\PhPgSql\\PHPStan\\Tests\\": "tests/"
 		}
 	},
 	"scripts": {

@@ -5,8 +5,8 @@
 	<rule ref="SlevomatCodingStandard.Files.TypeNameMatchesFileName">
 		<properties>
 			<property name="rootNamespaces" type="array">
-				<element key="src" value="Forrest79\PhPgSql"/>
-				<element key="tests" value="Forrest79\PhPgSql\Tests"/>
+				<element key="src" value="Forrest79\PhPgSql\PHPStan"/>
+				<element key="tests" value="Forrest79\PhPgSql\PHPStan\Tests"/>
 			</property>
 		</properties>
 	</rule>
