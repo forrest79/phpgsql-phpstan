@@ -5,8 +5,8 @@
 [![License](https://poser.pugx.org/forrest79/phpgsql-phpstan/license)](//packagist.org/packages/forrest79/phpgsql-phpstan)
 [![Build](https://github.com/forrest79/phpgsql-phpstan/actions/workflows/build.yml/badge.svg?branch=master)](https://github.com/forrest79/phpgsql-phpstan/actions/workflows/build.yml)
 
-* [PHPStan](https://github.com/phpstan/phpstan)
 * [PhPgSql](https://github.com/forrest79/phpgsql)
+* [PHPStan](https://github.com/phpstan/phpstan)
 
 ## Introduction
 
@@ -41,7 +41,7 @@ parameters:
 
 Or you can set just one extension:
 
-- for `PhPgSql\Db\Result` (for fetching the correct `Row` object from fetch methods - unfortunately `Row` iteration must be typed right in your code for now):
+- for `PhPgSql\Db\Result` (for fetching the correct `Row` object from fetch methods):
 
 ```yaml
 services:
@@ -49,7 +49,7 @@ services:
         arguments:
             dbRowClass: MyOwn\PhPgSql\Db\RowXyz
 ```
-- for `PhPgSql\Fluent\QueryExecute` (for fetching the correct `Row` object from fetch methods - unfortunately `Row` iteration must be typed right in your code for now):
+- for `PhPgSql\Fluent\QueryExecute` (for fetching the correct `Row` object from fetch methods):
 
 ```yaml
 services:
