@@ -30,8 +30,8 @@ services:
 		tags:
 			- phpstan.broker.dynamicMethodReturnTypeExtension
 
-	Forrest79PhPgSqlPHPStanTypeFluentComplexDynamicMethodReturnTypeExtension:
-		class: Forrest79\PhPgSql\PHPStan\Type\FluentComplexDynamicMethodReturnTypeExtension
+	Forrest79PhPgSqlPHPStanTypeFluentConditionDynamicMethodReturnTypeExtension:
+		class: Forrest79\PhPgSql\PHPStan\Type\FluentConditionDynamicMethodReturnTypeExtension
 		arguments:
 			fluentQueryClass: %forrest79.phpgsql.fluentQueryClass%
 		tags:

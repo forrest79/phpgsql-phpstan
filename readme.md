@@ -58,11 +58,11 @@ services:
             dbRowClass: MyOwn\PhPgSql\Db\RowXyz
 ```
 
-- for `PhPgSql\Fluent\Complex` (to return right `Query` in `query()` method):
+- for `PhPgSql\Fluent\Condition` (to return right `Query` in `query()` method):
 
 ```yaml
 services:
-    Forrest79PhPgSqlPHPStanReflectionFluentComplexDynamicMethodReturnTypeExtension:
+    Forrest79PhPgSqlPHPStanReflectionFluentConditionDynamicMethodReturnTypeExtension:
         arguments:
             fluentQueryClass: MyOwn\PhPgSql\Fluent\QueryXyz
 ```

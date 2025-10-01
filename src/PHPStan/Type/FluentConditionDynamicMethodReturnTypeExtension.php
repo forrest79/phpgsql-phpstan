@@ -8,7 +8,7 @@ use PHPStan\Reflection\MethodReflection;
 use PHPStan\Type;
 use PhpParser\Node\Expr\MethodCall;
 
-final class FluentComplexDynamicMethodReturnTypeExtension implements Type\DynamicMethodReturnTypeExtension
+final class FluentConditionDynamicMethodReturnTypeExtension implements Type\DynamicMethodReturnTypeExtension
 {
 	private string $fluentQueryClass;
 
@@ -21,7 +21,7 @@ final class FluentComplexDynamicMethodReturnTypeExtension implements Type\Dynami
 
 	public function getClass(): string
 	{
-		return PhPgSql\Fluent\Complex::class;
+		return PhPgSql\Fluent\Condition::class;
 	}
 
 

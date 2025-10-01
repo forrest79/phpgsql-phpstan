@@ -3,19 +3,19 @@ ignoreErrors:
 		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
 		message: Unused parameter $methodCall.
 		count: 1
-		path: src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php
+		path: src/PHPStan/Type/FluentConditionDynamicMethodReturnTypeExtension.php
 
 	-
 		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
 		message: Unused parameter $methodReflection.
 		count: 1
-		path: src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php
+		path: src/PHPStan/Type/FluentConditionDynamicMethodReturnTypeExtension.php
 
 	-
 		sniff: SlevomatCodingStandard.Functions.UnusedParameter.UnusedParameter
 		message: Unused parameter $scope.
 		count: 1
-		path: src/PHPStan/Type/FluentComplexDynamicMethodReturnTypeExtension.php
+		path: src/PHPStan/Type/FluentConditionDynamicMethodReturnTypeExtension.php
 
 	-
 		sniff: SlevomatCodingStandard.Variables.UnusedVariable.UnusedVariable

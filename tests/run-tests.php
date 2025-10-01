@@ -13,6 +13,6 @@ $connection = new Db\Connection();
 
 $ownQuery = new OwnQuery(new Fluent\QueryBuilder(), $connection);
 
-Tests::testFluentComplexDynamicMethodReturnTypeExtension($ownQuery);
+Tests::testFluentConditionDynamicMethodReturnTypeExtension($ownQuery);
 Tests::testDbResultDynamicMethodReturnTypeExtension($ownQuery->execute());
 Tests::testFluentQueryExecuteDynamicMethodReturnTypeExtension($ownQuery);

@@ -7,15 +7,15 @@ use Forrest79\PhPgSql\Db;
 final class Tests
 {
 
-	public static function testFluentComplexDynamicMethodReturnTypeExtension(OwnQuery $ownQuery): void
+	public static function testFluentConditionDynamicMethodReturnTypeExtension(OwnQuery $ownQuery): void
 	{
 		$ownQuery->ownQueryFunction();
 
-		$complex = $ownQuery->whereAnd();
+		$condition = $ownQuery->whereAnd();
 
-		$ownQueryFromComplex = $complex->query();
+		$ownQueryFromCondition = $condition->query();
 
-		$ownQueryFromComplex->ownQueryFunction();
+		$ownQueryFromCondition->ownQueryFunction();
 	}
 
 
@@ -128,10 +128,6 @@ final class Tests
 
 		self::checkList($result->fetchPairs(null, 'column'));
 
-		foreach ($result->getIterator() as $ownRowIteration) {
-			$ownRowIteration->ownRowFunction();
-		}
-
 		foreach ($result->fetchIterator() as $ownRowIteration) {
 			$ownRowIteration->ownRowFunction();
 		}
@@ -190,10 +186,6 @@ final class Tests
 
 		foreach ($ownQuery->fetchAssoc('id') as $ownRowAssoc) {
 			$ownRowAssoc->ownRowFunction();
-		}
-
-		foreach ($ownQuery->getIterator() as $ownRowIteration) {
-			$ownRowIteration->ownRowFunction();
 		}
 
 		foreach ($ownQuery->fetchIterator() as $ownRowIteration) {
