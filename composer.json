@@ -11,13 +11,13 @@
 		}
 	],
 	"require": {
-		"forrest79/phpgsql": "^2.0",
 		"php": "^8.3",
 		"phpstan/phpstan": "^2.0"
 	},
 	"require-dev": {
 		"forrest79/phpcs": "^2.3",
 		"forrest79/phpcs-ignores": "^0.6",
+		"forrest79/phpgsql": "^2.0",
 		"phpstan/phpstan-strict-rules": "^2.0",
 		"shipmonk/phpstan-rules": "^4.2"
 	},
