@@ -160,7 +160,7 @@ final class Tests
 	 */
 	private static function	checkArray(array $array): void
 	{
-		echo 'This is array: ' . implode(', ', $array);
+		echo 'This is array: ' . count($array);
 	}
 
 
@@ -169,7 +169,7 @@ final class Tests
 	 */
 	private static function	checkList(array $list): void
 	{
-		echo 'This is list: ' . implode(', ', $list);
+		echo 'This is list: ' . count($list);
 	}
 
 

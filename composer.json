@@ -19,7 +19,7 @@
 		"forrest79/phpcs-ignores": "^0.6",
 		"forrest79/phpgsql": "^2.0",
 		"phpstan/phpstan-strict-rules": "^2.0",
-		"shipmonk/phpstan-rules": "^4.2"
+		"shipmonk/phpstan-rules": "^4.3"
 	},
 	"autoload": {
 		"psr-4": {
@@ -32,7 +32,7 @@
 		}
 	},
 	"scripts": {
-		"phpcs": "vendor/bin/phpcs --bootstrap=vendor/forrest79/phpcs-ignores/src/bootstrap-outdated.php -s src tests",
+		"phpcs": "vendor/bin/phpcs --bootstrap=vendor/forrest79/phpcs-ignores/src/bootstrap-outdated.php -q -s src tests",
 		"phpstan": "vendor/bin/phpstan analyse src tests"
 	},
 	"config": {
